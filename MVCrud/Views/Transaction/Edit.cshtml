@@ -9,7 +9,7 @@
 <h4>Transaction</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3 offset-md-3">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TransactionId" />
@@ -39,15 +39,13 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary mt-3" />
+                <a style="margin-left: 183px;" class="btn btn-secondary mt-3" asp-controller="" asp-action="Index">Back</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
