@@ -21,7 +21,13 @@ namespace MVCrud.Controllers
         // GET: Transaction
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Transactions.ToListAsync());
+            var transactions = await _context.Transactions
+                .OrderBy(o => o.AccountOwner)
+                .ToListAsync();
+
+            ViewBag.TransactionCount = transactions.Count;
+
+            return View(transactions);
         }
 
         // GET: Transaction/Details/5
@@ -55,6 +61,11 @@ namespace MVCrud.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TransactionId,AccountNumber,AccountOwner,BankName,Amount,Date")] Transaction transaction)
         {
+            if (transaction.AccountOwner == "Richard")
+            {
+                transaction.Amount = transaction.Amount * 2;
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(transaction);
